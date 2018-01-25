@@ -1,14 +1,14 @@
 # Mailer
-Short description and motivation.
+My first gem test
 
 ## Usage
-How to use my plugin.
+It will be used to send data to mailer api micro-service :D.
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mailer'
+gem 'mailer', github: 'Silvin/mailer', branch: 'master'
 ```
 
 And then execute:
