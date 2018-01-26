@@ -17,10 +17,10 @@ module Mailer
       puts("noque no")
     end
     def send
-        self.template_params['custom_params'] = self.custom_params
-        self.values['template_params'] = self.template_params
-        self.values['attachments'] = self.attachments
-        producer.publish('boletia_mailer', self.values.to_json, '')  
+        self.template_params['custom_params'] = custom_params
+        self.values['template_params'] = template_params
+        self.values['attachments'] = attachments
+        producer.publish('boletia_mailer', values.to_json, '')  
     end
 
     def add_to(to_email)
