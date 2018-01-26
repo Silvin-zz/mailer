@@ -12,5 +12,6 @@ module Mailer
     end
     def send_email
       producer.publish('boletia_mailer', 'Hola Silvin, aqui andamos', '')
+    end
   end
 end
