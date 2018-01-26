@@ -24,19 +24,19 @@ module Mailer
     end
 
     def add_to(to_email)
-      self.values = { to: to_email }
+      @values = { to: to_email }
     end
 
     def add_template_params(name:, value:)
-      self.template_params[name] = value
+      @template_params[name] = value
     end
 
     def add_custom_param(template_name:, variable_name:, values: {})
-      self.custom_params << { name: variable_name, template: template_name, value: values }
+      @custom_params << { name: variable_name, template: template_name, value: values }
     end
 
     def add_attachment(source:, filename:, extension:)
-      self.attachments << { source: source, filename: filename, extension: extension }
+      @attachments << { source: source, filename: filename, extension: extension }
     end
   end
 end
