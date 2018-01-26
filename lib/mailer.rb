@@ -14,7 +14,7 @@ module Mailer
       begin
         producer.publish('boletia_mailer', 'Hola Silvin, aqui andamos', '')  
         raise MailerException.new("Fallamos .....")
-      rescue => StandardError e
+      rescue StandardError => e
         raise MailerException.new(e.message)
       end
     end
