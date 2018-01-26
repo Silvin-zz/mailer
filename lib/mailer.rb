@@ -11,7 +11,12 @@ module Mailer
       puts("noque no")
     end
     def send_email
-      producer.publish('boletia_mailer', 'Hola Silvin, aqui andamos', '')
+      begin
+        producer.publish('boletia_mailer', 'Hola Silvin, aqui andamos', '')  
+        raise MailerException.new("Fallamos .....")
+      rescue => StandardError e
+        raise MailerException.new(e.message)
+      end
     end
   end
 end
