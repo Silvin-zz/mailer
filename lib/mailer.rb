@@ -1,6 +1,12 @@
 module Mailer
   class API
     include Phobos::Producer
+
+    @values           = {}
+    @template_params  = {}
+    @custom_params    = []
+    @attachments      = []
+
     def initialize(to:, subject:, template:)
       @values = {
         to:       to,
@@ -17,10 +23,10 @@ module Mailer
       puts("noque no")
     end
     def send
-        @template_params['custom_params'] = custom_params
-        @values['template_params'] = template_params
-        @values['attachments'] = attachments
-        producer.publish('boletia_mailer', values.to_json, '')  
+        @template_params['custom_params'] = @custom_params
+        @values['template_params'] = @template_params
+        @values['attachments'] = @attachments
+        producer.publish('boletia_mailer', @values.to_json, '')  
     end
 
     def add_to(to_email)
