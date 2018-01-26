@@ -1,17 +1,42 @@
 module Mailer
   class API
     include Phobos::Producer
-    def initialize
-      p("Iniciando el constructor")
-      puts("Iniciando el constructor")
+    def initialize(to:, subject:, template:)
+      @values = {
+        to:       to,
+        subject:  subject,
+        template: template
+      }
+      @template_params  = {}
+      @custom_params    = []
+      @attachments      = []
     end
 
     def prueba
       p("Ejecutando codigo de prueba, noque no")
       puts("noque no")
     end
-    def send_email
-        producer.publish('boletia_mailer', 'Hola Silvin, aqui andamos', '')  
+    def send
+        self.template_params['custom_params'] = self.custom_params
+        self.values['template_params'] = self.template_params
+        self.values['attachments'] = self.attachments
+        producer.publish('boletia_mailer', self.values.to_json, '')  
+    end
+
+    def add_to(to_email)
+      self.values = { to: to_email }
+    end
+
+    def add_template_params(name:, value:)
+      self.template_params[name] = value
+    end
+
+    def add_custom_param(template_name:, variable_name:, values: {})
+      self.custom_params << { name: variable_name, template: template_name, value: values }
+    end
+
+    def add_attachment(source:, filename:, extension:)
+      self.attachments << { source: source, filename: filename, extension: extension }
     end
   end
 end
