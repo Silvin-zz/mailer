@@ -17,9 +17,9 @@ module Mailer
       puts("noque no")
     end
     def send
-        self.template_params['custom_params'] = custom_params
-        self.values['template_params'] = template_params
-        self.values['attachments'] = attachments
+        @template_params['custom_params'] = custom_params
+        @values['template_params'] = template_params
+        @values['attachments'] = attachments
         producer.publish('boletia_mailer', values.to_json, '')  
     end
 
